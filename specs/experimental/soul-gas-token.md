@@ -20,7 +20,12 @@ To bridge the gap between traditional web users and the growing world of Web3, w
 ## How It Works
 
 - **Technical Implementation**: SoulGasToken is a non-transferable ERC20 contract with two mutual *exclusive* modes: it can be either backed by native gas token or only the sequencer can `mint` new tokens. The mode needs to be decided at genesis and can never change after that. To maintain its non-transferable nature, all attempts to use ERC20's transfer, transferFrom, or approve methods will result in failure.
-- **Wallet Compatibility**: The transaction format remains consistent with existing Rollup ones. Users can transact using ETH wallets without the need for additional ones (e.g., AA wallets), ensuring a smooth user experience.
+  - Reference Implementation:
+    - [op-geth changes](https://github.com/ethstorage/op-geth/pull/1)
+    - [op-node changes](https://github.com/ethstorage/optimism/pull/19)
+    - [SoulGasToken contract](https://github.com/blockchaindevsh/optimism/blob/souleth/packages/contracts-bedrock/src/L2/SoulGasToken.sol)
+- **Wallet Compatibility**: The transaction format remains consistent with existing Rollup ones. Users can transact using ETH wallets without the need for additional ones (e.g., AA wallets), ensuring a smooth user experience. Users can also see their SoulGasToken balance by importing SoulGasToken into the wallet.
+- **Custom Gas Token Compatibility**: SoulGasToken is also compatible with the [Custom Gas Token](https://github.com/ethereum-optimism/specs/discussions/140) feature. Users can choose to use SoulGasToken either with or without Custom Gas Token being enabled.
 - **Gas Fee Process**: For an L2 transaction, the fee will be deducted from the user's SoulGasToken balance if it's sufficient. Otherwise, the system will draw from the user's native gas token balance.
 
 ## Potential Challenges
